@@ -27,22 +27,23 @@ while True:
             id=video_id
         ).execute()
         
-        published_at = video_response['items'][0]['snippet']['publishedAt']
-        title = video_response['items'][0]['snippet']['title']
-        comment_count = video_response['items'][0]['statistics']['commentCount']
-        view_count = video_response['items'][0]['statistics']['viewCount']
-        like_count = video_response['items'][0]['statistics']['likeCount']
-        duration = video_response['items'][0]['contentDetails']['duration']
+        if len(video_response) > 0:
+            published_at = video_response['items'][0]['snippet']['publishedAt']
+            title = video_response['items'][0]['snippet']['title']
+            comment_count = video_response['items'][0]['statistics']['commentCount']
+            view_count = video_response['items'][0]['statistics']['viewCount']
+            like_count = video_response['items'][0]['statistics']['likeCount']
+            duration = video_response['items'][0]['contentDetails']['duration']
 
-        values = [video_id
-                ,published_at
-                ,title
-                ,comment_count
-                ,view_count
-                ,like_count
-                ,duration]
-        
-        print(','.join(values))
+            values = [video_id
+                    ,published_at
+                    ,title
+                    ,comment_count
+                    ,view_count
+                    ,like_count
+                    ,duration]
+            
+            print(','.join(values))
 
         time.sleep(3)
 
