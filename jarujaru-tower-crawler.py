@@ -19,9 +19,30 @@ while True:
 
     for i in range(len(playlist_items_response['items'])):
         video_id = playlist_items_response['items'][i]['snippet']['resourceId']['videoId']
-        published_at = playlist_items_response['items'][i]['snippet']['publishedAt']
-        title = playlist_items_response['items'][i]['snippet']['title']
-        print(f'{video_id}, {published_at}, {title}')
+
+        video_response = youtube.videos().list(
+            part=['snippet', 'statistics', 'contentDetails'],
+            id=video_id
+        ).execute()
+        
+        published_at = video_response['items'][0]['snippet']['publishedAt']
+        title = video_response['items'][0]['snippet']['title']
+        comment_count = video_response['items'][0]['statistics']['commentCount']
+        view_count = video_response['items'][0]['statistics']['viewCount']
+        like_count = video_response['items'][0]['statistics']['likeCount']
+        duration = video_response['items'][0]['contentDetails']['duration']
+
+        values = [video_id
+                ,published_at
+                ,title
+                ,comment_count
+                ,view_count
+                ,like_count
+                ,duration]
+        
+        print(','.join(values))
+
+        time.sleep(3)
 
     if 'nextPageToken' in playlist_items_response.keys():
         next_page_token = playlist_items_response['nextPageToken']
