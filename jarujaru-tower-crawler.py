@@ -18,7 +18,10 @@ while True:
     ).execute()
 
     for i in range(len(playlist_items_response['items'])):
-        print(playlist_items_response['items'][i]['snippet']['title'])
+        video_id = playlist_items_response['items'][i]['snippet']['resourceId']['videoId']
+        published_at = playlist_items_response['items'][i]['snippet']['publishedAt']
+        title = playlist_items_response['items'][i]['snippet']['title']
+        print(f'{video_id}, {published_at}, {title}')
 
     if 'nextPageToken' in playlist_items_response.keys():
         next_page_token = playlist_items_response['nextPageToken']
