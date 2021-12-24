@@ -9,6 +9,8 @@ youtube = build('youtube', 'v3', developerKey = YOUTUBE_API_KEY)
 
 next_page_token = None
 
+print('video_id,published_at,title,comment_count,view_count,like_count,duration')
+
 while True:
     playlist_items_response = youtube.playlistItems().list(
         part='snippet',
