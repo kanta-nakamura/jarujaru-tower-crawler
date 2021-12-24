@@ -12,4 +12,5 @@ playlist_items_response = youtube.playlistItems().list(
     maxResults=50
 ).execute()
 
-print(playlist_items_response)
+for i in range(50):
+    print(playlist_items_response['items'][i]['snippet']['title'])
