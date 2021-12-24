@@ -27,7 +27,7 @@ while True:
             id=video_id
         ).execute()
         
-        if len(video_response) > 0:
+        if len(video_response['items']) > 0:
             published_at = video_response['items'][0]['snippet']['publishedAt']
             title = video_response['items'][0]['snippet']['title']
             comment_count = video_response['items'][0]['statistics']['commentCount']
